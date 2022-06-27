@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Control : MonoBehaviour
+public class MonsterControl : MonoBehaviour
 {
 
-   
     private int count = 1;
     public float speed;
-    
+
 
     public int health = 100;
     public int attack = 10;
@@ -28,9 +27,9 @@ public class Control : MonoBehaviour
     {
 
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-       
 
-        if(health<=0)
+
+        if (health <= 0)
         {
             Destroy(gameObject);
         }
@@ -38,15 +37,15 @@ public class Control : MonoBehaviour
 
         RaycastHit hit;
 
-      
 
-        Ray ray=new Ray(transform.position,transform.forward);
-        
+
+        Ray ray = new Ray(transform.position, transform.forward);
+
 
         //충돌하는 layermask만 판별하기 위함
-        if(Physics.Raycast(ray,out hit,2.0f,layermask[0]))
+        if (Physics.Raycast(ray, out hit, 2.0f, layermask[0]))
         {
-          
+
 
             // 애니메이터 컨트롤러에서 현재 애니메이터의 상태의 이름이“attack1”일 때 
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("attack1"))
@@ -55,7 +54,7 @@ public class Control : MonoBehaviour
                 if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
                 {
                     animator.Rebind();
-                    hit.transform.GetComponent<MonsterControl>().health -= 10;
+                    hit.transform.GetComponent<Control>().health -= 10;
 
                 }
             }
@@ -63,7 +62,7 @@ public class Control : MonoBehaviour
             animator.SetBool("Attack", true);
         }
 
-        else if(Physics.Raycast(ray,out hit,4.0f,layermask[1]))
+        else if (Physics.Raycast(ray, out hit, 4.0f, layermask[1]))
         {
             speed = 0.0f;
             animator.SetBool("Attack", false);
@@ -75,9 +74,9 @@ public class Control : MonoBehaviour
             animator.SetBool("Attack", false);
         }
 
-       
+
     }
 
-   
-   
+
+
 }
