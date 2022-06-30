@@ -3,18 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 [System.Serializable]
-public class Information : MonoBehaviour
+public class Data
 {
     public int price;
-    
-    public Text moneyUI;
+    public Sprite shape;
+    public Sprite priceSprite;
+}
 
-    public Image priceUI;
+
+
+public class information : MonoBehaviour
+{
+    public Data[] data; 
+    public Image[] monsterUI;
+    public Image[] priceUI;
+
+
 
     public void Start()
     {
-        moneyUI.text = price.ToString();
+        for(int i=0;i<data.Length;i++)
+        {
+            monsterUI[i].sprite = data[i].shape;
+            priceUI[i].sprite = data[i].priceSprite;
+        }
+       
     }
 }
 
