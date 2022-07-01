@@ -34,7 +34,7 @@ public class CreateMonster : MonoBehaviour
 
         int rand = Random.Range(0, 3);
        
-        if (rand == 1)
+        if (rand == 1||rand==2||rand==0)
         {
           
             Instantiate

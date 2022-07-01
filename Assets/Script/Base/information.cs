@@ -9,7 +9,7 @@ public class Data
 {
     public int price;
     public Sprite shape;
-    public Sprite priceSprite;
+    public Sprite weapon;
 }
 
 
@@ -18,8 +18,8 @@ public class information : MonoBehaviour
 {
     public Data[] data; 
     public Image[] monsterUI;
-    public Image[] priceUI;
-
+    public Image[] weaponUI;
+    public Text[] priceText;
 
 
     public void Start()
@@ -27,7 +27,8 @@ public class information : MonoBehaviour
         for(int i=0;i<data.Length;i++)
         {
             monsterUI[i].sprite = data[i].shape;
-            priceUI[i].sprite = data[i].priceSprite;
+            weaponUI[i].sprite = data[i].weapon;
+            priceText[i].text = data[i].price.ToString();
         }
        
     }
