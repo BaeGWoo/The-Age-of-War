@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class Control : MonoBehaviour
 {
- 
-   
-    private int count = 1;
-    public float speed;
-    
 
-    public float health = 100;
+    
+   int count = 0;
+    public float speed;
+
+
+    public float currentHealth;
+    public float maxhealth = 100;
     public int attack = 10;
 
     public LayerMask[] layermask;
@@ -22,7 +23,7 @@ public class Control : MonoBehaviour
 
     private void Start()
     {
-        healthGauge.value = health/100;
+        healthGauge.value = currentHealth/maxhealth;
         animator = GetComponent<Animator>();
     }
 
@@ -33,12 +34,12 @@ public class Control : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
        
         
-        if(health<=0)
+        if(currentHealth<=0)
         {
             Destroy(gameObject);
         }
 
-        healthGauge.value = health/100;
+        healthGauge.value = currentHealth/maxhealth;
 
         RaycastHit hit;
 
@@ -56,11 +57,13 @@ public class Control : MonoBehaviour
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("attack1"))
             {
                 // 현재 애니메이션의 진행도가 1보다 크거나 같다면 User Interface를 비활성화하도록 설계하였습니다.
-                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime-count >= 1)
                 {
-                    animator.Rebind();
-                    hit.transform.GetComponent<MonsterControl>().health -= 10;
-
+                    if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime%2>=0.1f)
+                    {
+                        count++;
+                        hit.transform.GetComponent<MonsterControl>().health -= attack;
+                    }
                 }
             }
             speed = 0.0f;
@@ -70,6 +73,7 @@ public class Control : MonoBehaviour
 
         else if(Physics.Raycast(ray,out hit,4.0f,layermask[1]))
         {
+            count = 0;
             speed = 0.0f;
             animator.SetBool("Idle", true);
             animator.SetBool("Attack", false);
@@ -78,6 +82,7 @@ public class Control : MonoBehaviour
 
         else
         {
+            count = 0;
             speed = 3.0f;
             animator.SetBool("Attack", false);
             animator.SetBool("Idle", false);

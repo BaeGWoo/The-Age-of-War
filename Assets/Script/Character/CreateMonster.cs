@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class CreateMonster : MonoBehaviour
 {
-    public Button goblinButton;
+    public Button[] CreateButton;
 
 
     private void Start()
@@ -16,15 +16,38 @@ public class CreateMonster : MonoBehaviour
     }
 
 
-    public void Create()
+    public void Create(string name)
     {
-        Instantiate
-            (
-            Resources.Load<GameObject>("Warrior Goblin"),
-            new Vector3(-28,0,50),
-            Quaternion.Euler(0,90,0)
-            );
-        StartCoroutine(Wait(3.0f));
+        switch (name)
+        {
+            case "Goblin":
+                Instantiate(
+                    Resources.Load<GameObject>("Warrior Goblin"),
+                    new Vector3(-28, 0, 50),
+                    Quaternion.Euler(0, 90, 0)
+                 );
+                StartCoroutine(Wait(3.0f, CreateButton[0]));
+                break;
+            case "Troll":
+                Instantiate(
+                    Resources.Load<GameObject>("Troll"),
+                    new Vector3(-28, 0, 50),
+                    Quaternion.Euler(0, 90, 0)
+                );
+                StartCoroutine(Wait(5.0f, CreateButton[1]));
+                break;
+
+            case "Lich":
+                Instantiate(
+                Resources.Load<GameObject>("Lich"),
+                new Vector3(-28, 0, 50),
+                Quaternion.Euler(0, 90, 0)
+                );
+                StartCoroutine(Wait(10.0f, CreateButton[2]));
+                break;
+        }
+       
+       
     }
 
 
@@ -48,19 +71,19 @@ public class CreateMonster : MonoBehaviour
 
 
     //매개변수로 넣은 숫자만큼 대기
-    IEnumerator Wait(float timer)
+    IEnumerator Wait(float timer,Button button)
     {
 
-        goblinButton.interactable = false;
+        button.interactable = false;
         
         while(timer>1.0f)
         {
             timer -= Time.deltaTime;
-            goblinButton.image.fillAmount = (1.0f / timer);
+            button.image.fillAmount = (1.0f / timer);
             yield return new WaitForFixedUpdate();
         }
 
         //수행
-        goblinButton.interactable = true;
+        button.interactable = true;
     }
 }

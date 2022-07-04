@@ -128,7 +128,7 @@ ModelImporter:
     second: 1
   - first:
       74: 7400000
-    second: idle
+    second: Idle
   - first:
       74: 7400002
     second: idle_action
@@ -146,10 +146,10 @@ ModelImporter:
     second: damage
   - first:
       74: 7400012
-    second: hit
+    second: attack1
   - first:
       74: 7400014
-    second: die
+    second: death1
   - first:
       74: 7400016
     second: walk
@@ -206,7 +206,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: idle
+      name: Idle
       takeName: idle
       internalID: 0
       firstFrame: 1
@@ -380,7 +380,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: hit
+      name: attack1
       takeName: hit
       internalID: 0
       firstFrame: 280
@@ -391,7 +391,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -407,9 +407,9 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 279.9
     - serializedVersion: 16
-      name: die
+      name: death1
       takeName: die
       internalID: 0
       firstFrame: 310

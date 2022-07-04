@@ -58,7 +58,7 @@ public class MonsterControl : MonoBehaviour
                 if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
                 {
                     animator.Rebind();
-                    hit.transform.GetComponent<Control>().health -= 10;
+                    hit.transform.GetComponent<Control>().currentHealth -= 10;
 
                 }
             }
