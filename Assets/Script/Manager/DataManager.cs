@@ -14,7 +14,7 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
 
-    //public float timer;
+   
     public Text moneyText;
 
     public Stuff stuff = new Stuff();
@@ -28,12 +28,7 @@ public class DataManager : MonoBehaviour
 
     private void Update()
     {
-        /*timer += Time.deltaTime;
-        if(timer>=1.0f)
-        {
-            stuff.money += 50;
-            timer = 0.0f;
-        }*/
+       
         moneyText.text = stuff.money.ToString();
     }
 
