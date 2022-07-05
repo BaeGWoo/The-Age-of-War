@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     {
         window.SetActive(false);
         GameManager.instance.state = true;
+        StartCoroutine(DataManager.instance.Increase());
     }
     
 

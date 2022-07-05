@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class Control : MonoBehaviour
 {
 
@@ -62,7 +61,16 @@ public class Control : MonoBehaviour
                     if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime%2>=0.1f)
                     {
                         count++;
-                        hit.transform.GetComponent<MonsterControl>().health -= attack;
+                        if(hit.collider.tag=="Enemy")
+                        {
+                            hit.transform.GetComponent<Control>().currentHealth -= attack;
+                        }
+                        else if(hit.collider.tag=="Base")
+                        {
+                            hit.transform.GetComponent<BaseStation>().currentHealth -= attack;
+                        }
+
+                      
                     }
                 }
             }

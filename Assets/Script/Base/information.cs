@@ -7,15 +7,23 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Data
 {
+    
+    public static Data data;
+
+   
+
     public int price;
     public Sprite shape;
     public Sprite weapon;
+
+
 }
 
 
 
 public class information : MonoBehaviour
 {
+    static public information instance;
     public Data[] data; 
     public Image[] monsterUI;
     public Image[] weaponUI;
@@ -24,6 +32,8 @@ public class information : MonoBehaviour
 
     public void Start()
     {
+     
+        instance = this;
         for(int i=0;i<data.Length;i++)
         {
             monsterUI[i].sprite = data[i].shape;
@@ -32,6 +42,8 @@ public class information : MonoBehaviour
         }
        
     }
+
+   
 }
 
 

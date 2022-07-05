@@ -14,6 +14,7 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
 
+    //public float timer;
     public Text moneyText;
 
     public Stuff stuff = new Stuff();
@@ -27,10 +28,24 @@ public class DataManager : MonoBehaviour
 
     private void Update()
     {
+        /*timer += Time.deltaTime;
+        if(timer>=1.0f)
+        {
+            stuff.money += 50;
+            timer = 0.0f;
+        }*/
         moneyText.text = stuff.money.ToString();
     }
 
-
+    public IEnumerator Increase()
+    {
+        while(GameManager.instance.state)
+        {
+            yield return new WaitForSeconds(1f);
+            stuff.money += 50;
+            Save();
+        }
+    }
     public void MoneyIncrease(int value)
     {
         stuff.money += value;

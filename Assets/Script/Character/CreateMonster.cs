@@ -7,12 +7,14 @@ using UnityEngine.UI;
 
 public class CreateMonster : MonoBehaviour
 {
+
+  
     public Button[] CreateButton;
 
 
     private void Start()
     {
-        InvokeRepeating("EnemyInstance", 0, 5);
+        InvokeRepeating("EnemyInstance", 0, 3);
     }
 
 
@@ -21,29 +23,41 @@ public class CreateMonster : MonoBehaviour
         switch (name)
         {
             case "Goblin":
-                Instantiate(
-                    Resources.Load<GameObject>("Warrior Goblin"),
-                    new Vector3(-28, 0, 50),
-                    Quaternion.Euler(0, 90, 0)
-                 );
-                StartCoroutine(Wait(3.0f, CreateButton[0]));
+                if (information.instance.data[0].price <= DataManager.instance.stuff.money)
+                {
+                    DataManager.instance.stuff.money -= information.instance.data[0].price;
+                    Instantiate(
+                        Resources.Load<GameObject>("Warrior Goblin"),
+                        new Vector3(-28, 0, 50),
+                        Quaternion.Euler(0, 90, 0)
+                     );
+                    StartCoroutine(Wait(3.0f, CreateButton[0]));
+                }
                 break;
             case "Troll":
-                Instantiate(
+                if (information.instance.data[1].price <= DataManager.instance.stuff.money)
+                {
+                    DataManager.instance.stuff.money -= information.instance.data[1].price;
+                    Instantiate(
                     Resources.Load<GameObject>("Troll"),
                     new Vector3(-28, 0, 50),
                     Quaternion.Euler(0, 90, 0)
                 );
-                StartCoroutine(Wait(5.0f, CreateButton[1]));
+                    StartCoroutine(Wait(5.0f, CreateButton[1]));
+                }
                 break;
 
             case "Lich":
-                Instantiate(
+                if (information.instance.data[2].price <= DataManager.instance.stuff.money)
+                {
+                    DataManager.instance.stuff.money -= information.instance.data[2].price;
+                    Instantiate(
                 Resources.Load<GameObject>("Lich"),
                 new Vector3(-28, 0, 50),
                 Quaternion.Euler(0, 90, 0)
                 );
-                StartCoroutine(Wait(10.0f, CreateButton[2]));
+                    StartCoroutine(Wait(10.0f, CreateButton[2]));
+                }
                 break;
         }
        
@@ -53,11 +67,11 @@ public class CreateMonster : MonoBehaviour
 
     public void EnemyInstance()
     {
-        if (GameManager.instance.state) return;
+        if (!GameManager.instance.state) return;
 
         int rand = Random.Range(0, 3);
        
-        if (rand == 1||rand==2||rand==0)
+        if (rand == 1)
         {
           
             Instantiate
